@@ -36,13 +36,13 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Аренда', 'url' => ['/site/index']],
+            ['label' => 'Аренда', 'url' => ['/client/index']],
 
             Yii::$app->user->isGuest ? (
-                ['label' => 'Клиенты', 'url' => ['/site/login']]
+                ['label' => 'Клиенты', 'url' => ['/client/login']]
             ) : (
                 '<li>'
-                . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
+                . Html::beginForm(['/client/logout'], 'post', ['class' => 'navbar-form'])
                 . Html::submitButton(
                     'Logout (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link']
