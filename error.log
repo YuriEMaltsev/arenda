@@ -1,0 +1,2 @@
+[Fri Aug 12 17:11:56.261966 2016] [:error] [pid 2300:tid 1812] [client 127.0.0.1:51043] script 'C:/webroot/arenda/web/PhpStorm-e61fc480-a018-437d-b096-2610d409f412.php' not found or unable to stat
+[Fri Aug 12 17:14:42.507074 2016] [:error] [pid 2300:tid 1804] [client 127.0.0.1:51201] script 'C:/webroot/arenda/web/index2.php' not found or unable to stat
