@@ -7,7 +7,7 @@ $this->title = 'Arenda test application ';
 <div class="site-index">
 
     <div class="jumbotron">
-        <h2>ИНФОРМАЦИЯ О КЛИЕНТЕ</h2>
+        <? echo "<h2>ИНФОРМАЦИЯ О КЛИЕНТЕ  </h2>". Yii::$app->user->ID ?>
 <!--
         <p class="lead">  Компания АРЕНДА рада приветствовать вас  </p>
 -->

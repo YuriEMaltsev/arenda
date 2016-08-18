@@ -36,20 +36,11 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Аренда', 'url' => ['/client/index']],
+            ['label' => 'Аренда', 'url' => ['/user/index']],
 
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Клиенты', 'url' => ['/client/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/client/logout'], 'post', ['class' => 'navbar-form'])
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link']
-                )
-                . Html::endForm()
-                . '</li>'
-            ),
+            Yii::$app->user->isGuest ?
+                (['label' => 'Вход'   , 'url' => ['/user/login']]) :
+                (['label' => 'Клиенты', 'url' => ['/user/index']] ),
             ['label' => 'О фирме', 'url' => ['/site/about']],
             ['label' => 'Контакты', 'url' => ['/site/contact']]
         ],

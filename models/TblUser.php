@@ -21,9 +21,11 @@ use Yii;
  */
 class TblUser extends \yii\db\ActiveRecord
 {
+    private $_user = false;
     /**
      * @inheritdoc
      */
+
     public static function tableName()
     {
         return 'Tbl_User';
@@ -42,31 +44,41 @@ class TblUser extends \yii\db\ActiveRecord
             [['pasp_ser', 'drive_lic_ser'], 'string', 'max' => 4],
             [['pasp_num', 'drive_lic_num'], 'string', 'max' => 6],
 
-            [['e-mail', 'passw'], 'required', 'message' => 'error'],
+//            [['e-mail', 'passw'], 'required', 'message' => ''],
 //            [ 'email', 'allowEmpty' => false, 'checkMX' => true, 'message' => 'error'],
-            ['passw', 'authenticate']
+              ['passw', 'validatePassword']
         ];
     }
 
-    public function authenticate($attribute,$params)
+
+//    public function validatePassword($attribute, $params)
+    public function validatePassword($attribute)
     {
-        echo "authenti /n";
-        $this->_identity = Account::model()->checkLogin();
-        if(!$this->_identity)
-            $this->addError('password', 'Пароль или имя пользователя неправильный');
+        if (!$this->hasErrors()) {
+            $user = $this->getUser();
+
+            if (!$user || !$user->validatePassword($this->passw)) {
+                $this->addError($attribute, 'Некорректное имя или пароль');
+            }
+
+        }
+    }
+
+
+//    public function Login($email, md5($password))
+
+        public function login()
+    {
+        if ($this->validate()) {
+            //return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
+            return Yii::$app->user->login($this->getUser(), 3600*24*30 );
+        }
+        return false;
     }
 /*
-    public function primaryKey()
-    {
-        return 'id';
-    }
-*/
-
-//    public function checkLogin($email, md5($password))
-    public function checkLogin()
-    {
         //echo "check LOGIN e-mail=$this->e_mail and passw=$this->passw /n";
         $user = $this-> findAll("e-mail=$this->e_mail and passw=$this->passw");
+
         //findByAttributes(array('e-mail' => $this->e_mail  , 'passw' => $this->passw));
 
         if($user===null)
@@ -76,6 +88,17 @@ class TblUser extends \yii\db\ActiveRecord
 
         // установить ID user
         return true;
+      /
+    }
+*/
+
+    public function getUser()
+    {
+        if ($this->_user === false) {
+            $this->_user = User::findByUsername($this->user_name) ;
+        }
+
+        return $this->_user;
     }
 
 

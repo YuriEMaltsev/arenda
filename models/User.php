@@ -10,6 +10,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public $authKey;
     public $accessToken;
 
+    // c этим всё понятно, позже перекручу на свою базу пользователей
     private static $users = [
         '100' => [
             'id' => '100',
@@ -100,5 +101,6 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public function validatePassword($password)
     {
         return $this->password === $password;
+
     }
 }

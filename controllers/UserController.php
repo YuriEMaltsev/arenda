@@ -70,6 +70,7 @@ class UserController extends Controller
         return $this->render('index');
     }
 
+
     /**
      * Login action.
      *
@@ -82,12 +83,19 @@ class UserController extends Controller
         }
 
         $model = new TblUser();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+        if ($model->load(Yii::$app->request->post()) && $model->Login()) {
+
+            // echo 'Ура ты сделал это!';
+            //Yii::$app->user->setIdentity( "11111" );
+
+
+            //"$model->id
+            //return $this->goBack();
+
+            return $this->render('index', ['model' => $model, ]);
+
         }
-        return $this->render('login', [
-            'model' => $model,
-        ]);
+        return $this->render('login', ['model' => $model, ]);
     }
 
     /**
